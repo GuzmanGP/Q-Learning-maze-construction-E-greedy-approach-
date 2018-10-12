@@ -135,13 +135,6 @@ class Qlearning:
                     continue
                 elif state.grid[_y][_x] == self.grid_resources['obstacle']: 
                     continue
-                elif state.grid[y][x] == 'w' and state.grid[_y][_x] == 'w':
-                    for wall in self.grid_resources['walls']:
-                        if ((x,y) in wall.block1 and (_x,_y) in wall.block1) or ((x,y) in wall.block2 and (_x,_y) in wall.block2) or ((x,y) in wall.block3 and (_x,_y) in wall.block3):
-                            aa = True
-                            break
-                    if aa:
-                        continue
                 self.possible_actions.append((_x, _y))
         if len(self.possible_actions) == 0:
             raise ValueError(f"Can't go anywhere from cell {x,y}.")
