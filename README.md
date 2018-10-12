@@ -1,4 +1,6 @@
-# 
+# Python script: Q-Learning general case implementation
+file> _E_greedy_Q_Learning_general_application_:
+Python >3.0 Q-Learning implementation for any generic implementation in which the environment could be represented as a grid of strings.
 
 
 # Jupyter Notebook: Q-Learning fire evacuation from maze example
