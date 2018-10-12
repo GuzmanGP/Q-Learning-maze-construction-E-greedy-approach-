@@ -1,0 +1,61 @@
+from E_greedy_Q_Learning_general_application import State, Qlearning
+import time as sp
+
+class Application_class:
+
+    self.learn()
+
+    def learn (self):
+        
+        grid_resources = {'*': [-1, False], 'f': [-10, False], 'X': [100, True], 'obstacle':'o'}
+        grid = grid = [
+          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+          ['o', '*', '*', 'o', '*', '*', '*', 'o', 'o', '*', '*', '*', '*', '*', '*', '*', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', '*', 'f', '*', 'o', 'f', '*', 'o', 'f', '*', 'f', '*', 'o', 'f', 'o', '*', 'f', '*', '*', 'o'],
+          ['o', '*', '*', 'o', '*', '*', 'f', 'o', '*', '*', '*', 'o', '*', '*', 'f', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', '*', 'f', 'f', '*', 'f', '*', 'o', 'f', '*', 'f', 'f', '*', 'f', '*', '*', 'f', '*', '*', 'o'],
+          ['o', '*', '*', '*', '*', '*', '*', 'o', '*', 'f', '*', '*', '*', '*', 'f', 'o', 'f', '*', 'f', '*', 'o'],
+          ['o', 'f', 'f', '*', '*', '*', '*', 'o', 'o', 'f', 'f', '*', 'f', '*', '*', '*', 'f', '*', '*', '*', 'o'],
+          ['o', 'f', '*', 'f', '*', '*', 'f', '*', 'o', '*', '*', 'f', 'f', '*', 'f', '*', 'f', '*', 'f', '*', 'o'],
+          ['o', 'f', '*', 'f', 'f', '*', '*', 'o', '*', '*', '*', 'f', 'f', '*', 'f', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', '*', '*', 'o', '*', '*', '*', '*', 'o', '*', '*', 'o', '*', '*', '*', 'o', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', '*', 'f', '*', 'o', '*', '*', 'o', 'f', '*', 'f', '*', 'o', 'f', '*', 'f', '*', 'f', '*', 'o'],
+          ['o', 'f', '*', 'f', '*', '*', 'f', 'o', '*', '*', '*', 'f', 'f', '*', 'f', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', '*', 'f', 'f', '*', '*', '*', 'o', '*', '*', 'f', 'f', '*', 'f', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', '*', '*', '*', '*', '*', '*', 'o', 'f', '*', '*', '*', '*', 'f', '*', 'o', '*', 'f', '*', 'o'],
+          ['o', 'f', 'f', '*', 'f', '*', '*', 'o', 'o', 'f', 'f', '*', 'f', '*', '*', '*', 'f', '*', '*', '*', 'o'],
+          ['o', 'f', '*', '*', 'f', '*', '*', 'o', 'o', '*', '*', '*', '*', '*', '*', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', '*', 'f', '*', '*', '*', '*', '*', '*', '*', 'f', 'o', 'f', '*', '*', '*', 'o', '*', 'f', '*', 'o'],
+          ['o', 'f', '*', 'o', '*', 'o', '*', '*', '*', '*', '*', 'o', '*', '*', '*', 'f', '*', 'f', '*', '*', 'o'],
+          ['o', 'f', 'o', '*', 'f', '*', 'o', '*', 'o', 'f', 'f', '*', 'f', '*', '*', '*', 'o', '*', 'f', '*', 'o'],
+          ['o', 'o', 'o', 'o', 'X', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o']
+        ]
+        qtable = self.create_map_qtable(grid, grid_resources)
+        
+        start_state = State(grid=grid, agent_pos=(0,0))
+        e_greedy_maze = Qlearning(
+            start_state = start_state,
+            grid_resources = grid_resources)
+        n_episode_steps = 100 
+        n_episodes = 7 * len(grid) * len(grid[0])
+        start = sp.time()
+        distributed_positions = [(0,0), (19,16), (0,2), (0,18), (0,16), (0,19), (6,6), (2,19), (2,0), (11,11), (10,12), (12,10), (17,7), (7,17)]
+        for x, y in distributed_positions:            
+            e_greedy_maze.start_state = State(grid=grid, agent_pos=(x,y))
+            e_greedy_maze.learn(n_episodes=n_episodes, n_episode_steps=n_episode_steps)
+        end = sp.time()
+        print(f'#  create_map_qtable > Time to complete:{end - start: .2f}s = {(end - start)/60:.2f} min = {(end - start)/3600:.2f} hours')
+        e_greedy_maze.visualize_max_quality_action (e_greedy_maze.q_table)
+        qtable = e_greedy_maze.q_table
+        
+        #===========================================================
+        
+        inference_state = State(grid=grid, agent_pos=occupant.pos)
+        e_greedy_maze = Qlearning(
+            inference_state = inference_state,
+            grid_resources = grid_resources )
+        e_greedy_maze.q_table = self.extract_from_pickle(qtable)
+        path, reward = e_greedy_maze.infer_path(n_episode_steps, inference_state)
+        e_greedy_maze.visualize_inferenced_path(path) 
+        return path #, reward
+        
