@@ -30,7 +30,6 @@ class Application_class:
           ['o', 'f', 'o', '*', 'f', '*', 'o', '*', 'o', 'f', 'f', '*', 'f', '*', '*', '*', 'o', '*', 'f', '*', 'o'],
           ['o', 'o', 'o', 'o', 'X', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o']
         ]
-        qtable = self.create_map_qtable(grid, grid_resources)
         
         start_state = State(grid=grid, agent_pos=(0,0))
         e_greedy_maze = Qlearning(
