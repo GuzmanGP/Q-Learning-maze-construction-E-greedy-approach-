@@ -160,7 +160,6 @@ class Qlearning:
         path = []
         tot_reward = 0
         for _ in range(n_episode_steps):
-            print(self.q_table[state])
             action = np.argmax(self.q_table[state])
             new_state, reward, done= self.observe_reward_value(state, self.extract_possible_actions(state)[action])
             state = new_state
