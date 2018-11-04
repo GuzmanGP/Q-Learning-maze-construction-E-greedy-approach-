@@ -1,4 +1,4 @@
 # Generic Q Learning case implementation
-Python >3.0 Q Learning (E-greedy approach) algorithm (Reinforcement Learning) for any generic implementation in which the environment could be represented as a grid of strings.
+Python >3.0 implementation of how to build and apply the Q-Learning E-greedy algorithm (Reinforcement Learning) to escape from a 2D maze with fire and obstacles. All this can be extrapoleted to several cases in which the implementation in which the environment could be represented as a grid of strings.
 
 
