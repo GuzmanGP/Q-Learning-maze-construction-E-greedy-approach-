@@ -201,7 +201,7 @@ class Qlearning:
         '''
         visualization_grid = deepcopy(self.inference_state.grid)
         for x,y in path:
-            visualization_grid[y][x] = "@"
+            visualization_grid[y][x] = "\u2638"
         for row in visualization_grid: #reversed mode> reversed(visualization_grid):
             print(' '.join(map(str, row)))
             
