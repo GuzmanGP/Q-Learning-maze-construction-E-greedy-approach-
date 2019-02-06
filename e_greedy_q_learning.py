@@ -39,7 +39,7 @@ class State:
         return hash(str(self.grid) + str(self.agent_pos))
     
     def __repr__(self): 
-        return f"State(grid={self.grid}, agent_pos={self.agent_pos})" 
+        return f"State(grid, agent_pos={self.agent_pos})" # grid={self.grid} if used
     
     
 class Qlearning:
@@ -179,7 +179,7 @@ class Qlearning:
 
         for x in range(len(visualization_grid[0])):
             for y in range(len(visualization_grid)):
-                ascii_per_action = {(x, y-1): '\u21D1', (x, y+1): '\u21D3', (x-1, y):'\u21D0', (x+1, y):'\u21D2', (x+1,y+1):'\u21D8',   (x-1,y-1):'\u21D6', (x+1,y-1):'\u21D7', (x-1,y+1):'\u21D9'}
+                ascii_per_action = {(x, y-1): '\u2191', (x, y+1): '\u2193', (x-1, y):'\u2190', (x+1, y):'\u2192', (x+1,y+1):'\u2198',   (x-1,y-1):'\u2196', (x+1,y-1):'\u2197', (x-1,y+1):'\u2199'}
                 if visualization_grid[y][x] == self.grid_resources['obstacle']:
                     visualization_grid[y][x] = '\u2587'
                 elif  visualization_grid[y][x] == self.grid_resources['goal']:
@@ -201,7 +201,7 @@ class Qlearning:
         '''
         visualization_grid = deepcopy(self.inference_state.grid)
         for x,y in path:
-            visualization_grid[y][x] = "\u2638"
+            visualization_grid[y][x] = "@"
         for row in visualization_grid: #reversed mode> reversed(visualization_grid):
             print(' '.join(map(str, row)))
             
