@@ -38,7 +38,7 @@ class State:
     def __hash__(self):
         return hash(str(self.grid) + str(self.agent_pos))
     
-    def __str__(self): 
+    def __repr__(self): 
         return f"State(grid={self.grid}, agent_pos={self.agent_pos})" 
     
     
